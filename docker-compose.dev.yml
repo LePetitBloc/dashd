@@ -1,0 +1,41 @@
+version: '3'
+services:
+  wallet:
+    build:
+      build:
+        context: .
+        args:
+          REPOSITORY: 'https://github.com/dashpay/dash'
+          REF: master
+    restart: always
+    ports:
+      - '9999:9999'
+      - '9998:9998'
+    command:
+      - '-rpcuser=dash-wallet'
+      - '-rpcpassword=tfsz322s'
+      - '-server=1'
+      - '-listen=0'
+    volumes:
+      - './wallet/:/home/dash/'
+  masternode:
+    build:
+      build:
+        context: .
+        args:
+          REPOSITORY: 'https://github.com/dashpay/dash'
+          REF: master
+    restart: always
+    ports:
+      - '9999:9999'
+      - '9998:9998'
+    command:
+      - '-rpcuser=dash-mn01'
+      - '-rpcpassword=tfsz322s'
+      - '-rpcallowip=::/0'
+      - '-server=0'
+      - '-listen=1'
+      - '-masternode=1'
+      - '-masternodeprivkey=YourMasternodePrivKey'
+    volumes:
+      - './masternode/:/home/dash/'

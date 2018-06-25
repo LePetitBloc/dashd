@@ -1,0 +1,44 @@
+file:
+  /usr/local/bin/dashd:
+    exists: true
+    mode: '0755'
+    filetype: file
+  /usr/local/bin/dash-cli:
+    exists: true
+    mode: '0755'
+    filetype: file
+  /usr/local/bin/dash-tx:
+    exists: true
+    mode: '0755'
+    filetype: file
+  /home/dash/.dashcore/dash.conf:
+    exists: true
+    filetype: file
+    contains:
+      - rpcuser
+      - rpcpassword
+  /home/dash/.dashcore/masternode.conf:
+    exists: true
+    filetype: file
+    contains:
+      - Masternode config file
+  /home/dash/data:
+    filetype: directory
+    exists: true
+port:
+  'tcp:9999':
+    listening: true
+  'tcp:9998':
+    listening: true
+user:
+  dash:
+    exists: true
+    groups:
+      - dash
+    home: /home/dash
+group:
+  dash:
+    exists: true
+process:
+  dashd:
+    running: true
